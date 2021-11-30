@@ -31,20 +31,21 @@ const isProd = process.env.NODE_ENV === 'production';
 // our destination directory
 const destination = path.resolve(__dirname, 'dist');
 
-// define server paths
-const serverEntry = './src/server/index.js';
-
 // define client paths
-const clientPaths = {
+const paths = {
+  server: './src/server',
   template: './src/client/template.html',
   pages: './src/client/pages',
 };
 
-const clientPages = fs.readdirSync(clientPaths.pages);
+// define server paths
+const serverEntry = path.resolve(paths.server, 'index.js');
+
+const clientPages = fs.readdirSync(paths.pages);
 
 const clientEntrypoints = clientPages.map((page) => ({
   name: `CLIENT - ${page}`,
-  entry: `${clientPaths.pages}/${page}/index.js`,
+  entry: `${paths.pages}/${page}/index.js`,
   filename: page, // we'll add the .html suffix to these
   // template: './src/client/dialog-demo/index.html',
 }));
@@ -123,6 +124,9 @@ const clientConfig = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    alias: {
+      src: path.resolve('./src'),
+    },
   },
   module: {
     rules: [
@@ -201,7 +205,7 @@ const clientConfigs = clientEntrypoints.map((clientEntrypoint) => {
         'process.env': JSON.stringify(envVars),
       }),
       new HtmlWebpackPlugin({
-        template: clientPaths.template,
+        template: paths.template,
         filename: `${clientEntrypoint.filename}${isProd ? '' : '-impl'}.html`,
         inlineSource: '^[^(//)]+.(js|css)$', // embed all js and css inline, exclude packages with '//' for dynamic cdn insertion
       }),
@@ -277,6 +281,14 @@ const serverConfig = {
   },
   resolve: {
     extensions: ['.ts', '.js', '.json'],
+    alias: {
+      src: './src',
+      utils: path.resolve(
+        __dirname,
+        'packages/google-app-script-sheets-utils/src'
+      ),
+      // 'utils/*': './packages/google-app-script-sheets-utils/src/*',
+    },
   },
   module: {
     rules: [
@@ -337,6 +349,10 @@ const serverConfig = {
       ),
     }),
     new GasPlugin(),
+    new webpack.ProvidePlugin({
+      core: 'core',
+      utils: 'utils',
+    }),
   ],
 };
 

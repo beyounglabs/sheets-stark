@@ -1,0 +1,3 @@
+[submodule "packages/google-app-script-sheets-utils"]
+	path = packages/google-app-script-sheets-utils
+	url = git@github.com:igor-ribeiro/google-app-script-sheets-utils.git

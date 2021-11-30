@@ -1,7 +1,19 @@
 {
   "compilerOptions": {
-    "types": ["gas-types-detailed"],
+    "types": ["node", "gas-types-detailed"],
     "jsx": "react",
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "strictNullChecks": true,
+    "target": "ES2019",
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "paths": {
+      "utils/*": ["./packages/google-app-script-sheets-utils/src/*"]
+    }
+  },
+  "include": ["global.d.ts", "**/*.ts", "**/*.tsx"]
 }

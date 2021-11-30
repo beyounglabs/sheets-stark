@@ -1,14 +1,14 @@
 {
   "root": true,
   "parser": "babel-eslint",
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "extends": ["plugin:react/recommended"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": "warn",
     "camelcase": "warn",
     "import/prefer-default-export": "warn",
     "import/no-extraneous-dependencies": "warn",
     "prefer-object-spread": "warn",
-    "spaced-comment":"off"
+    "spaced-comment": "off"
   }
 }
