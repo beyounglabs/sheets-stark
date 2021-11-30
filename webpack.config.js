@@ -34,6 +34,21 @@ const destination = path.resolve(__dirname, 'dist');
 // define server paths
 const serverEntry = './src/server/index.js';
 
+// define client paths
+const clientPaths = {
+  template: './src/client/template.html',
+  pages: './src/client/pages',
+};
+
+const clientPages = fs.readdirSync(clientPaths.pages);
+
+const clientEntrypoints = clientPages.map((page) => ({
+  name: `CLIENT - ${page}`,
+  entry: `${clientPaths.pages}/${page}/index.js`,
+  filename: page, // we'll add the .html suffix to these
+  // template: './src/client/dialog-demo/index.html',
+}));
+
 // define appsscript.json file path
 const copyAppscriptEntry = './appsscript.json';
 
@@ -41,26 +56,26 @@ const copyAppscriptEntry = './appsscript.json';
 const devDialogEntry = './dev/index.js';
 
 // define client entry points and output names
-const clientEntrypoints = [
-  {
-    name: 'CLIENT - Dialog Demo',
-    entry: './src/client/dialog-demo/index.js',
-    filename: 'dialog-demo', // we'll add the .html suffix to these
-    template: './src/client/dialog-demo/index.html',
-  },
-  {
-    name: 'CLIENT - Dialog Demo Bootstrap',
-    entry: './src/client/dialog-demo-bootstrap/index.js',
-    filename: 'dialog-demo-bootstrap',
-    template: './src/client/dialog-demo-bootstrap/index.html',
-  },
-  {
-    name: 'CLIENT - Sidebar About Page',
-    entry: './src/client/sidebar-about-page/index.js',
-    filename: 'sidebar-about-page',
-    template: './src/client/sidebar-about-page/index.html',
-  },
-];
+// const clientEntrypoints = [
+//   {
+//     name: 'CLIENT - Dialog Demo',
+//     entry: './src/client/dialog-demo/index.js',
+//     filename: 'dialog-demo', // we'll add the .html suffix to these
+//     template: './src/client/dialog-demo/index.html',
+//   },
+//   {
+//     name: 'CLIENT - Dialog Demo Bootstrap',
+//     entry: './src/client/dialog-demo-bootstrap/index.js',
+//     filename: 'dialog-demo-bootstrap',
+//     template: './src/client/dialog-demo-bootstrap/index.html',
+//   },
+//   {
+//     name: 'CLIENT - Sidebar About Page',
+//     entry: './src/client/sidebar-about-page/index.js',
+//     filename: 'sidebar-about-page',
+//     template: './src/client/sidebar-about-page/index.html',
+//   },
+// ];
 
 // define certificate locations
 // see "npm run setup:https" script in package.json
@@ -176,7 +191,7 @@ const DynamicCdnWebpackPluginConfig = {
 };
 
 // webpack settings used by each client entrypoint defined at top
-const clientConfigs = clientEntrypoints.map(clientEntrypoint => {
+const clientConfigs = clientEntrypoints.map((clientEntrypoint) => {
   return {
     ...clientConfig,
     name: clientEntrypoint.name,
@@ -186,7 +201,7 @@ const clientConfigs = clientEntrypoints.map(clientEntrypoint => {
         'process.env': JSON.stringify(envVars),
       }),
       new HtmlWebpackPlugin({
-        template: clientEntrypoint.template,
+        template: clientPaths.template,
         filename: `${clientEntrypoint.filename}${isProd ? '' : '-impl'}.html`,
         inlineSource: '^[^(//)]+.(js|css)$', // embed all js and css inline, exclude packages with '//' for dynamic cdn insertion
       }),
@@ -207,7 +222,7 @@ const devServer = {
   port: PORT,
   https: true,
   // run our own route to serve the package google-apps-script-webpack-dev-server
-  before: app => {
+  before: (app) => {
     // this '/gas/' path needs to match the path loaded in the iframe in dev/index.js
     app.get('/gas/*', (req, res) => {
       res.setHeader('Content-Type', 'text/html');
@@ -225,7 +240,7 @@ if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
 }
 
 // webpack settings for the development client wrapper
-const devClientConfigs = clientEntrypoints.map(clientEntrypoint => {
+const devClientConfigs = clientEntrypoints.map((clientEntrypoint) => {
   envVars.FILENAME = clientEntrypoint.filename;
   return {
     ...clientConfig,

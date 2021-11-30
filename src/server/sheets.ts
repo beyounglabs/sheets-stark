@@ -14,18 +14,18 @@ export const getSheetsData = () => {
   });
 };
 
-export const addSheet = sheetTitle => {
+export const addSheet = (sheetTitle) => {
   SpreadsheetApp.getActive().insertSheet(sheetTitle);
   return getSheetsData();
 };
 
-export const deleteSheet = sheetIndex => {
+export const deleteSheet = (sheetIndex) => {
   const sheets = getSheets();
   SpreadsheetApp.getActive().deleteSheet(sheets[sheetIndex]);
   return getSheetsData();
 };
 
-export const setActiveSheet = sheetName => {
+export const setActiveSheet = (sheetName) => {
   SpreadsheetApp.getActive()
     .getSheetByName(sheetName)
     .activate();

@@ -4,7 +4,7 @@ import FormInput from './FormInput';
 import SheetButton from './SheetButton';
 
 // This is a wrapper for google.script.run that lets us use promises.
-import server from '../../utils/server';
+import server from '../../../utils/server';
 
 const { serverFunctions } = server;
 
@@ -19,14 +19,14 @@ const SheetEditor = () => {
       .catch(alert);
   }, []);
 
-  const deleteSheet = sheetIndex => {
+  const deleteSheet = (sheetIndex) => {
     serverFunctions
       .deleteSheet(sheetIndex)
       .then(setNames)
       .catch(alert);
   };
 
-  const setActiveSheet = sheetName => {
+  const setActiveSheet = (sheetName) => {
     serverFunctions
       .setActiveSheet(sheetName)
       .then(setNames)
@@ -35,7 +35,7 @@ const SheetEditor = () => {
 
   // You can also use async/await notation for server calls with our server wrapper.
   // (This does the same thing as .then().catch() in the above handlers.)
-  const submitNewSheet = async newSheetName => {
+  const submitNewSheet = async (newSheetName) => {
     try {
       const response = await serverFunctions.addSheet(newSheetName);
       setNames(response);
@@ -58,7 +58,7 @@ const SheetEditor = () => {
       <FormInput submitNewSheet={submitNewSheet} />
       <TransitionGroup className="sheet-list">
         {names.length > 0 &&
-          names.map(name => (
+          names.map((name) => (
             <CSSTransition
               classNames="sheetNames"
               timeout={500}
