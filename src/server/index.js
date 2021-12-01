@@ -1,7 +1,14 @@
-import * as publicUiFunctions from './ui';
-import * as publicSheetFunctions from './sheets';
+import * as ui from './ui';
+import * as common from './common';
+import * as updatePrices from './pages/update-prices';
 
-// Expose public functions by attaching to `global`
-global.onOpen = publicUiFunctions.onOpen;
-global.openDialog = publicUiFunctions.openDialog;
-global.getSheetsData = publicSheetFunctions.getSheetsData;
+global.onOpen = ui.onOpen;
+
+global.updateEnv = common.updateEnv;
+
+global.updatePrices_openDialog = updatePrices.openDialog;
+global.updatePrices_getCampaignList = updatePrices.getCampaignList;
+global.updatePrices_setCampaign = updatePrices.setCampaign;
+global.updatePrices_getProducts = updatePrices.getProducts;
+global.updatePrices_setProducts = updatePrices.setProducts;
+global.updatePrices_save = updatePrices.save;

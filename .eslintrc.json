@@ -7,7 +7,14 @@
     "prettier/prettier": "warn",
     "camelcase": "warn",
     "import/prefer-default-export": "warn",
-    "import/no-extraneous-dependencies": "warn",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
     "prefer-object-spread": "warn",
     "spaced-comment": "off"
   }

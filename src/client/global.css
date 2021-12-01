@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 12px 0;
+}
+
+.container {
+  padding: 12px;
+}
+
+select,
+option {
+  text-align: left;
+}
+
+.fluid {
+  width: 100%;
+}
+
+button.fluid,
+input.fluid {
+  margin-left: 0;
+}
+
+button.fluid + button.fluid {
+  margin-top: 6px;
+}
+
+.button-group {
+  display: flex;
+}
+
+.button-group button {
+  flex: 1;
+}

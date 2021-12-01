@@ -5,10 +5,3 @@ export const onOpen = () => {
 
   menu.addToUi();
 };
-
-export const openDialog = () => {
-  const html = HtmlService.createHtmlOutputFromFile('dialog-demo')
-    .setWidth(600)
-    .setHeight(600);
-  SpreadsheetApp.getUi().showModalDialog(html, 'React Modal');
-};
