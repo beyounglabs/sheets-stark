@@ -13,6 +13,8 @@ import server from 'src/client/utils/server';
 
 const { serverFunctions } = server;
 
+const STEPS = ['Escolher Ambiente', 'Escolher Campanha', 'Escolher Produtos'];
+
 export default function UpdatePrices() {
   return (
     <Router>
@@ -34,7 +36,13 @@ export default function UpdatePrices() {
 function EnvPage() {
   const { navigate } = useRouter();
 
-  return <SelectEnv onDone={() => navigate('/campaign')} />;
+  return (
+    <SelectEnv
+      onDone={() => {
+        navigate('/campaign');
+      }}
+    />
+  );
 }
 
 function CampaignPage() {
@@ -127,7 +135,7 @@ function CampaignPage() {
           Voltar
         </button>
         <button type="submit" className="action">
-          Escolher
+          Escolher Produtos
         </button>
       </div>
 
@@ -289,8 +297,8 @@ function ProductsPage() {
           Voltar
         </button>
 
-        <button type="submit" className="action">
-          Importar produtos
+        <button type="submit" className="share">
+          Importar produtos ({state.getAll('product').length || 0})
         </button>
       </div>
 

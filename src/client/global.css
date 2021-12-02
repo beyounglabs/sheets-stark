@@ -12,6 +12,10 @@ hr {
   padding: 12px;
 }
 
+label {
+  cursor: pointer;
+}
+
 select,
 option {
   text-align: left;

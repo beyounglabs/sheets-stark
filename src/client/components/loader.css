@@ -20,7 +20,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  border: 2px solid black;
+  border: 2px solid #4787ed;
   border-top-color: transparent;
   animation-name: loader;
   animation-duration: 0.5s;

@@ -12,3 +12,4 @@ global.updatePrices_setCampaign = updatePrices.setCampaign;
 global.updatePrices_getProducts = updatePrices.getProducts;
 global.updatePrices_setProducts = updatePrices.setProducts;
 global.updatePrices_save = updatePrices.save;
+global.updatePrices_reset = updatePrices.reset;

@@ -1,21 +1,8 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width="400" src="https://i.imgur.com/83Y7bWN.png" alt="React & Google Apps Script logos"></a>
-</p>
-
-<div align="center">
-
-[![Status](https://img.shields.io/badge/status-active-success.svg?color=46963a&style=flat-square)]()
-[![GitHub Issues](https://img.shields.io/github/issues/enuchi/React-Google-Apps-Script.svg?color=lightblue&style=flat-square)](https://github.com/enuchi/React-Google-Apps-Script/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/enuchi/React-Google-Apps-Script.svg?color=blue&style=flat-square)](https://github.com/enuchi/React-Google-Apps-Script/pulls)
-[![License](https://img.shields.io/github/license/enuchi/React-Google-Apps-Script?color=pink&style=flat-square)](/LICENSE)
-
-</div>
-
-<p align="center"> This is your boilerplate project for developing React apps inside Google Sheets, Docs, Forms and Slides projects. It's perfect for personal projects and for publishing complex add-ons in the G Suite Marketplace.
-</p>
-
 ---
+
+## Google Style
+
+[Google CSS style](https://developers.google.com/apps-script/add-ons/guides/css)
 
 ## 📝 Table of Contents
 
@@ -285,8 +272,8 @@ This project uses the [gas-client](https://github.com/enuchi/gas-client) package
 ```js
 // Google's documentation wants you to do this. Boo.
 google.script.run
-  .withSuccessHandler(response => doSomething(response))
-  .withFailureHandler(err => handleError(err))
+  .withSuccessHandler((response) => doSomething(response))
+  .withFailureHandler((err) => handleError(err))
   .addSheet(sheetTitle);
 
 // Poof! With a little magic we can now do this:
@@ -296,8 +283,8 @@ const { serverFunctions } = new Server();
 // We now have access to all our server functions, which return promises!
 serverFunctions
   .addSheet(sheetTitle)
-  .then(response => doSomething(response))
-  .catch(err => handleError(err));
+  .then((response) => doSomething(response))
+  .catch((err) => handleError(err));
 
 // Or we can equally use async/await style:
 async () => {

@@ -141,3 +141,8 @@ export function save() {
   campaign.clear();
   products.clear();
 }
+
+export function reset() {
+  campaign.clear();
+  products.clear();
+}
